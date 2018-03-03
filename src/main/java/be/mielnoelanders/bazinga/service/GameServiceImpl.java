@@ -1,8 +1,6 @@
 package be.mielnoelanders.bazinga.service;
 
 import be.mielnoelanders.bazinga.domain.Game;
-import be.mielnoelanders.bazinga.domain.Publisher;
-import be.mielnoelanders.bazinga.domain.Supplier;
 import be.mielnoelanders.bazinga.repository.GameRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +16,6 @@ public class GameServiceImpl implements GameService {
 
     @Autowired
     private GameRepository repository;
-    @Autowired
-    private Supplier supplier;
-    @Autowired
-    private Publisher publisher;
 
 
 //    @PostConstruct

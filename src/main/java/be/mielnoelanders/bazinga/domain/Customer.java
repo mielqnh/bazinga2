@@ -1,14 +1,12 @@
 package be.mielnoelanders.bazinga.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Component
 public class Customer implements Serializable {
 
 

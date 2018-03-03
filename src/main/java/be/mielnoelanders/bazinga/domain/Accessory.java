@@ -1,7 +1,5 @@
 package be.mielnoelanders.bazinga.domain;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +7,6 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-@Component
 public class Accessory implements Serializable {
 
     // FIELDS

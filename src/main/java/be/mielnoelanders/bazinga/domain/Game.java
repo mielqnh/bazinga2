@@ -1,14 +1,11 @@
 package be.mielnoelanders.bazinga.domain;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Component
 public class Game implements Serializable {
 
     // FIELDS
@@ -33,7 +30,7 @@ public class Game implements Serializable {
 
     private int edition;
 
-    @OneToMany(mappedBy = "expansion")
+    @OneToMany(mappedBy = "expandedGame")
     private List<Expansion> expansions;
 
     @NotNull

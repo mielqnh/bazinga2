@@ -1,11 +1,9 @@
 package be.mielnoelanders.bazinga.domain;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.io.Serializable;
+
 @Entity
-@Component
 public class Expansion implements Serializable {
 
     // FIELDS
