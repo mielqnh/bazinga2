@@ -26,7 +26,7 @@ public class GameActionsInMemoryTest extends InMemoryTest {
     }
 
     @Test
-    public void iCanListAllGamesANewGame() {
+    public void iCanListAllGames() {
         createNumberOfGames(100);
         List<GameTO> games = gameActions.zoekAlleGames();
         assertThat(games.size(), is(100));
