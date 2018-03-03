@@ -2,9 +2,11 @@ package be.mielnoelanders.bazinga.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 public class Supplier implements Serializable{
@@ -17,9 +19,6 @@ public class Supplier implements Serializable{
 
     @Autowired
     private Address address;
-
-    @ManyToMany(mappedBy = "suppliers")
-    private List<Game> games;
 
     private String name;
     private String email;
@@ -59,12 +58,6 @@ public class Supplier implements Serializable{
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    public List<Game> getGames() {
-        return games;
-    }
-    public void setGames(List<Game> games) {
-        this.games = games;
-    }
 
     // OVERRIDES
     @Override
@@ -73,7 +66,6 @@ public class Supplier implements Serializable{
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address=" + address +
-                ", games=" + games +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';

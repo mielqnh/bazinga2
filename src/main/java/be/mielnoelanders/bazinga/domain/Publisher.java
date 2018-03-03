@@ -1,8 +1,10 @@
 package be.mielnoelanders.bazinga.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 public class Publisher implements Serializable {
@@ -12,8 +14,6 @@ public class Publisher implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(mappedBy = "publisher")// Naam van de klasse
-    private List<Game> games;
 
     private String name;
     private String website;
