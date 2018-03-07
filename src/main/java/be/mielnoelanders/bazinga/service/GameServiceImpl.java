@@ -17,6 +17,21 @@ public class GameServiceImpl implements GameService {
     @Autowired
     private GameRepository repository;
 
+
+//    @PostConstruct
+//    public void init(){
+//        Game arkhamHorrorLCG = new Game();
+//        arkhamHorrorLCG.setTitle("Arkham Horror LCG");
+//        arkhamHorrorLCG.setEdition(1);
+//        arkhamHorrorLCG.setExpansions(null);
+//        arkhamHorrorLCG.setNormalPrice(39.99);
+//        arkhamHorrorLCG.setPromotionPercentage(0);
+//        arkhamHorrorLCG.setActualPrice(39.99);
+//        arkhamHorrorLCG.setPublisher(publisher);
+//        arkhamHorrorLCG.setSupplier(supplier);
+//        this.repository.save(arkhamHorrorLCG);
+//    }
+
     @Override
     public Iterable<Game> getAll() {
         return repository.findAll();

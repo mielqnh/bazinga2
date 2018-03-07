@@ -1,40 +1,35 @@
 package be.mielnoelanders.bazinga.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Expansion extends AbstractEntity implements Serializable {
-
-    private static final long serialVersionUID =1L;
+public class Expansion implements Serializable {
 
     // FIELDS
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name="game_id",nullable = false)
+    private Game expandedGame;
+
+    private String expansionNumber;
     private String title;
     private int edition;
+    private double normalPrice;
+    private int promotionPercentage;
+    private double actualPrice;
     private Publisher publisher;
     private int stock;
     private Supplier supplier;
 
-/* to be replaced by purchasePrice
-    private Price price;
-
-    @Column(name = "PURCHASE_PRICE")
-    @NotNull
-    private double purchasePrice;
-*/
-    // FIELDS WITH MAPPINGS
-    @ManyToOne
-    @JoinColumn(name="game_id")
-    private Game expandedGame;
-
-    // CONSTRUCTORS
-    public Expansion(){}
-
-    // GETTERS & SETTERS
-
-
-    // OVERRIDES
-
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

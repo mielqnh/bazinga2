@@ -1,26 +1,34 @@
 package be.mielnoelanders.bazinga.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
-public class Publisher extends AbstractEntity implements Serializable {
-
-    private static final long serialVersionUID = -1926628474232469673L;
+public class Publisher implements Serializable {
 
     // FIELDS
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+
     private String name;
     private String website;
-
-    //FIELDS WITH MAPPING
-    @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL)
-    private List<Game> games;
 
     // CONSTUCTORS
     public Publisher(){}
 
     // GETTERS & SETTERS
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }
@@ -34,10 +42,12 @@ public class Publisher extends AbstractEntity implements Serializable {
         this.website = website;
     }
 
-// OVERRIDES
+    // OVERRIDES
+
     @Override
     public String toString() {
         return "Publisher{" +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", website='" + website + '\'' +
                 '}';

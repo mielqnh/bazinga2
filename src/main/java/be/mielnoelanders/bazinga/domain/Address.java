@@ -1,29 +1,35 @@
 package be.mielnoelanders.bazinga.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class Address extends AbstractEntity implements Serializable {
-
-    private static final long serialVersionUID =1L;
+public class Address implements Serializable {
 
     // FIELDS
+    private static final long serialVersionUID =1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String street;
     private String number;
-    private String postalCode;
+    private int postalCode;
     private String city;
     private String country;
-
-    // FIELDS WITH MAPPINGS
-    @OneToOne(mappedBy = "address")
-    Customer customer;
 
     // CONSTRUCTORS
     public Address(){}
 
     // GETTERS & SETTERS
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getStreet() {
         return street;
     }
@@ -36,10 +42,10 @@ public class Address extends AbstractEntity implements Serializable {
     public void setNumber(String number) {
         this.number = number;
     }
-    public String getPostalCode() {
+    public int getPostalCode() {
         return postalCode;
     }
-    public void setPostalCode(String postalCode) {
+    public void setPostalCode(int postalCode) {
         this.postalCode = postalCode;
     }
     public String getCity() {
@@ -59,9 +65,10 @@ public class Address extends AbstractEntity implements Serializable {
     @Override
     public String toString() {
         return "Address{" +
-                "street='" + street + '\'' +
+                "id=" + id +
+                ", street='" + street + '\'' +
                 ", number='" + number + '\'' +
-                ", postalCode='" + postalCode + '\'' +
+                ", postalCode=" + postalCode +
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +
                 '}';

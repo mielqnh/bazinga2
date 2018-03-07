@@ -1,90 +1,83 @@
 package be.mielnoelanders.bazinga.domain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 public class Game extends AbstractEntity implements Serializable {
 
-    private static final long serialVersionUID =1L;
-
-    // FIELDS
-
+    @Column(name = "TITLE")
     private String title;
 
+    @Column(name = "EDITION")
     private int edition;
 
-    @ManyToOne
-    @JoinColumn(name="publisher_id")
-    private Publisher publisher;
+    @Column(name = "OFFICAL_PRICE")
+    private int officielePrijsInEurocent; //Als we alles in eurocent opslaan moeten we geen kommagetallen bijhouden
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
-    private List<SupplierGames> supplierGames;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
-    private List<CustomerGames> customerGames;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "expandedGame")
-    private List<Expansion> expansions;
-
-    // CONSTRUCTORS
     public Game(){}
 
-    private Game(Builder builder) {//Dit is de constructor van het builderpattern.
+    private Game(Builder builder) {
+        setId(builder.id);
         title = builder.title;
         edition = builder.edition;
-        publisher = builder.publisher;
-        supplierGames = builder.supplierGames;
-        customerGames = builder.customerGames;
-        expansions = builder.expansions;
+        officielePrijsInEurocent = builder.officielePrijsInEurocent;
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getEdition() {
+        return edition;
+    }
+
+    public int getOfficielePrijsInEurocent() {
+        return officielePrijsInEurocent;
     }
 
 
-    // GETTERS & SETTERS
 
-    // OVERRIDES
+    @Override
+    public String toString() {
+        return "Game{" +
+                "title='" + title + '\'' +
+                ", edition=" + edition +
+                ", officielePrijsInEurocent=" + officielePrijsInEurocent +
+                '}';
+    }
 
-    // STATIC INNER CLASS BUILDER (Als ik het goed begrijp zorgt die ervoor dat je instanties kan aanmaken die bepaalde kenmerken wel of net niet hebben.
-    // Zo heeft bijvoorbeeld niet elke game expansions, dus zou je die bij het aanmaken kunnen weglaten en heb je dus een game zonder het expansion-field.
     public static final class Builder {
+        private int id;
         private String title;
         private int edition;
-        private Publisher publisher;
-        private List<SupplierGames> supplierGames;
-        private List<CustomerGames> customerGames;
-        private List<Expansion> expansions;
+        private int officielePrijsInEurocent;
 
-        public Builder() {
+        private Builder() {
         }
 
-        public Builder title(String val) {
+        public Builder withId(int val) {
+            id = val;
+            return this;
+        }
+
+        public Builder withTitle(String val) {
             title = val;
             return this;
         }
 
-        public Builder edition(int val) {
+        public Builder withEdition(int val) {
             edition = val;
             return this;
         }
 
-        public Builder publisher(Publisher val) {
-            publisher = val;
-            return this;
-        }
-
-        public Builder supplierGames(List<SupplierGames> val) {
-            supplierGames = val;
-            return this;
-        }
-
-        public Builder customerGames(List<CustomerGames> val) {
-            customerGames = val;
-            return this;
-        }
-
-        public Builder expansions(List<Expansion> val) {
-            expansions = val;
+        public Builder withOfficielePrijsInEurocent(int val) {
+            officielePrijsInEurocent = val;
             return this;
         }
 
@@ -92,18 +85,4 @@ public class Game extends AbstractEntity implements Serializable {
             return new Game(this);
         }
     }
-
 }
-
-// FIELDS WITH MANYTOMANYMAPPINGS (FOUT)
-/*  @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "Game_Customer",
-            joinColumns = {@JoinColumn(name = "game_id")},
-            inverseJoinColumns = {@JoinColumn(name = "customer_id")})
-    private List<Customer> customers;
-
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "Game_Supplier",
-            joinColumns = {@JoinColumn(name = "game_id")},
-            inverseJoinColumns = {@JoinColumn(name = "supplier_id")})
-    private List<Supplier> suppliers;*/

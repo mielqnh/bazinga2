@@ -1,44 +1,51 @@
 package be.mielnoelanders.bazinga.domain;
 
-import javax.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
-public class Supplier extends AbstractEntity implements Serializable{
-
-    private static final long serialVersionUID = -5872135512196851021L;
+public class Supplier implements Serializable{
 
     // FIELDS
+    private static final long serialVersionUID =1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Autowired
+    private Address address;
+
     private String name;
     private String email;
     private String phoneNumber;
-    private String website;
-
-    //FIELDS WITH MAPPINGS
-    @OneToOne
-    @JoinColumn(name ="address_id")
-    private Address address;
-
-    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
-    private List<SupplierGames> supplierGames;
 
     // CONSTRUCTORS
     public Supplier(){}
 
     // GETTERS & SETTERS
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }
     public void setName(String name) {
         this.name = name;
     }
-//    public Address getAddress() {
-//        return address;
-//    }
-//    public void setAddress(Address address) {
-//        this.address = address;
-//    }
+    public Address getAddress() {
+        return address;
+    }
+    public void setAddress(Address address) {
+        this.address = address;
+    }
     public String getEmail() {
         return email;
     }
@@ -51,29 +58,16 @@ public class Supplier extends AbstractEntity implements Serializable{
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    public String getWebsite() {
-        return website;
-    }
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-    public List<SupplierGames> getSupplierGames() {
-        return supplierGames;
-    }
-    public void setSupplierGames(List<SupplierGames> supplierGames) {
-        this.supplierGames = supplierGames;
-    }
 
     // OVERRIDES
-
     @Override
     public String toString() {
         return "Supplier{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address=" + address +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", address=" + address +
-                ", website='" + website + '\'' +
                 '}';
     }
 }
